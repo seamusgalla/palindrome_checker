@@ -13,24 +13,26 @@ This outputs `false`
 
 Arguments can also be enclosed in single or double quotes.
 
-### Invalid Charachters
+### Valid Charachters
+Currently the program only takes the basic latin alphabet:  
+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ  
 
-``ispal gr8``  
-This will give the following error `invaldChar:'8'`
+An invalid input `ispal gr8` will give the following error `invaldChar:'8'`
 
 ### Multiple Arguments
+Aruments should be split with a single space ' '  
 ``ispal level palindrome gr8``  
 This will output `true false invalidChar:'8'`
 
-### Options
+## Options
 
-#### All Valid
+### All Valid
 If the `-allValid` flag is present the program will exit if any of the arguments are invalid.
 
 ``ispal -allValid level test invalid55``  
 This will output `Argument 3 => invalidChar:'5'`  
 
-#### White Space and Puncuation Marks
+### White Space and Puncuation Marks
 The program can ignore white space or puncuation marks if desired.
 
 ``ispal -ignorePunc race,car``  
@@ -39,6 +41,11 @@ This will output `true`
 To analyse arguements with white space the arguemetns must be enclosed by double or single quotes. Tabs and return charachters are considered white space.
 ``ispal -ignoreWhite "Was it a car or a cat I saw"``  
 This will output `true`
+
+### Custom Delimiter
+The `-d` flag can be used to specify a custom delimiter between the output results. By default this is `' '`.  
+e.g.
+`ispal -d=", " news level kayak` => `false, true, true`
 
 ## Build from source
 To build this package from source please use the latest version of go and git and have the [gb](https://getgb.io) package manager installed.
