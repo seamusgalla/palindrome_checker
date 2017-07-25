@@ -10,7 +10,7 @@ import (
 )
 
 var delimiter string
-var allMustBeValid, ignoreWhite, ignorePunc bool
+var allMustBeValid, ignoreWhite, ignorePunc, caseSen bool
 
 func init() {
 	flag.StringVar(&delimiter, "d", " ", "define the delimiter between results")
@@ -20,6 +20,8 @@ func init() {
 		"the program will ignore punctuation marks i.e. '!' or ':'")
 	flag.BoolVar(&ignoreWhite, "ignoreWhite", false,
 		"the program will ignore white space including tabs and returns")
+	flag.BoolVar(&caseSen, "caseSen", false,
+		"make the program case sensitive")
 }
 
 func main() {
@@ -38,7 +40,7 @@ func main() {
 	var err error
 
 	for i, testStr := range args {
-		result, err = palind.IsPalindrome(testStr, ignoreWhite, ignorePunc)
+		result, err = palind.IsPalindrome(testStr, ignoreWhite, ignorePunc, caseSen)
 		if err != nil {
 			if allMustBeValid {
 				fmt.Fprintf(os.Stderr, "Argument %d => %s\n", i, err.Error())

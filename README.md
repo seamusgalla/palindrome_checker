@@ -47,6 +47,13 @@ The `-d` flag can be used to specify a custom delimiter between the output resul
 e.g.
 `ispal -d=", " news level kayak` => `false, true, true`
 
+### Case Sensitive
+The `-caseSen` flag makes the palindrome check case sensitive
+
+e.g.
+`ispal -caseSen "Kayak"` => `false`  
+`ispal -caseSen "kayak"` => `true`
+
 ## Build from source
 To build this package from source please use the latest version of go and git and have the [gb](https://getgb.io) package manager installed.
 

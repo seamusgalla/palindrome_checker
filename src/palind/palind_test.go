@@ -6,7 +6,7 @@ import (
 )
 
 func TestIsPalindrome(t *testing.T) {
-	res, err := IsPalindrome("Level", false, false)
+	res, err := IsPalindrome("Level", false, false, false)
 	if err != nil {
 		t.Errorf("Unexpected Error: %s", err.Error())
 	}
@@ -16,7 +16,7 @@ func TestIsPalindrome(t *testing.T) {
 }
 
 func TestIsPalindrome_Fail(t *testing.T) {
-	res, err := IsPalindrome("palindrome", false, false)
+	res, err := IsPalindrome("palindrome", false, false, false)
 	if err != nil {
 		t.Errorf("Unexpected Error: %s", err.Error())
 	}
@@ -26,14 +26,14 @@ func TestIsPalindrome_Fail(t *testing.T) {
 }
 
 func TestIsPalindrome_InvalidInput(t *testing.T) {
-	_, err := IsPalindrome("gr8", false, false)
+	_, err := IsPalindrome("gr8", false, false, false)
 	if err == nil {
 		t.Error("Test should reject the '8' charachter")
 	}
 }
 
 func TestIsPalindrome_IgnoreWhiteSpace(t *testing.T) {
-	res, err := IsPalindrome("\tWas it a car or a cat I saw\n", true, false)
+	res, err := IsPalindrome("\tWas it a car or a cat I saw\n", true, false, false)
 	if err != nil {
 		t.Errorf("Unexpected Error: %s", err.Error())
 	}
@@ -43,7 +43,7 @@ func TestIsPalindrome_IgnoreWhiteSpace(t *testing.T) {
 }
 
 func TestIsPalindrome_IgnorePunctuation(t *testing.T) {
-	res, err := IsPalindrome("race,car!", false, true)
+	res, err := IsPalindrome("race,car!", false, true, false)
 	if err != nil {
 		t.Errorf("Unexpected Error: %s", err.Error())
 	}
@@ -53,12 +53,22 @@ func TestIsPalindrome_IgnorePunctuation(t *testing.T) {
 }
 
 func TestIsPalindrome_IgnoreWhiteSpaceAndPunctuation(t *testing.T) {
-	res, err := IsPalindrome("A man, a plan, a canal, Panama!", true, true)
+	res, err := IsPalindrome("A man, a plan, a canal, Panama!", true, true, false)
 	if err != nil {
 		t.Errorf("Unexpected Error: %s", err.Error())
 	}
 	if res != true {
 		t.Error("Test should return 'true'")
+	}
+}
+
+func TestIsPalindrome_CaseSensitive(t *testing.T) {
+	res, err := IsPalindrome("Kayak", true, true, true)
+	if err != nil {
+		t.Errorf("Unexpected Error: %s", err.Error())
+	}
+	if res != false {
+		t.Error("Test should return 'false'")
 	}
 }
 
