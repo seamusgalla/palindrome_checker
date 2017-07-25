@@ -37,7 +37,19 @@ The program can ignore white space or puncuation marks if desired.
 This will output `true`
 
 To analyse arguements with white space the arguemetns must be enclosed by double or single quotes. Tabs and return charachters are considered white space.
-``ispal -ignoreWhite "Was it a car or a cat I saw"``
+``ispal -ignoreWhite "Was it a car or a cat I saw"``  
+This will output `true`
+
+## Build from source
+To build this package from source please use the latest version of go and git and have the [gb](https://getgb.io) package manager installed.
+
+1. Navigate to your desired directory and clone the repo using  
+`git clone https://github.com/seamusgalla/palindrome_checker.git`
+
+2. Build the ispal tool using  `gb build all` from the same directory.
+This will create a the executable `bin\ispal.exe`
+
+You can now use the program e.g. `bin\ispal kayak` => `true`
 
 ## Licence
 
