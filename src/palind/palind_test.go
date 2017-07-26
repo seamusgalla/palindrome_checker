@@ -81,17 +81,67 @@ func TestRemoveChars(t *testing.T) {
 	}
 }
 
-func TestIsBasicLatin(t *testing.T) {
+func TestIsLatin(t *testing.T) {
 	var err error
-	err = isBasicLatin("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	var want string
+	err = isLatin("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 	if err != nil {
 		t.Errorf("Unexpected Error: %s", err.Error())
 	}
-
-	if err = isBasicLatin("thenumber6"); err.Error() != "invalidChar:'6'" {
-		t.Errorf("Wrong Error: %s", err.Error())
+	err = isLatin("thenumber6")
+	want = "invalidChar:'6'"
+	if err.Error() != want {
+		t.Errorf("Wrong Error: %s\nWant: %s", err.Error(), want)
 	}
-	if err = isBasicLatin("somePunc#"); err.Error() != "invalidChar:'#'" {
-		t.Errorf("Wrong Error: %s", err.Error())
+	err = isLatin("somePunc#")
+	want = "invalidChar:'#'"
+	if err.Error() != want {
+		t.Errorf("Wrong Error: %s\nWant: %s", err.Error(), want)
+	}
+}
+
+func TestReplace(t *testing.T) {
+	var want = "My dog"
+	var res = replace("My cat", "cat", "dog")
+	if res != want {
+		t.Errorf("Wrong Result: %s\nWant: %s", res, want)
+	}
+	want = "My tall cat"
+	res = replace("My tiny cat", "tiny", "tall")
+	if res != want {
+		t.Errorf("Wrong Result: %s\nWant: %s", res, want)
+	}
+	want = "My very very tiny cat"
+	res = replace("My really really tiny cat", "really", "very")
+	if res != want {
+		t.Errorf("Wrong Result: %s\nWant: %s", res, want)
+	}
+}
+
+func BenchmarkCaseInsensitiveCompareOld(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		caseInsensitiveCompareOld('b', 'B')
+		caseInsensitiveCompareOld('P', 'a')
+		caseInsensitiveCompareOld('x', 'x')
+	}
+}
+
+func BenchmarkCaseInsensitiveCompare(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		caseInsensitiveCompare('b', 'B')
+		caseInsensitiveCompare('P', 'a')
+		caseInsensitiveCompare('x', 'x')
+	}
+}
+
+func BenchmarkCustomReplace(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		replace("My really really tall cat", "really", "very")
+	}
+}
+
+func BenchmarkStandardLibraryReplace(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		strings.Replace("My really really tall cat", "really", "very", -1)
 	}
 }
