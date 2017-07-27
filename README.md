@@ -14,8 +14,7 @@ This outputs `false`
 Arguments can also be enclosed in single or double quotes.
 
 ### Valid Charachters
-Currently the program only takes the basic latin alphabet:  
-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ  
+Currently the program can handle basic latin letters as well as letters in the unicode [latin1 Suplement](https://en.wikipedia.org/wiki/List_of_Unicode_characters) set. This covers most Eurpean languages, including English, Spanish, German and French.
 
 An invalid input `ispal gr8` will give the following error `invaldChar:'8'`
 
